@@ -105,6 +105,7 @@ function wireButtons() {
     document.getElementById('go-analytics-btn').addEventListener('click', () => showStep('analytics'));
     // Step 3
     document.getElementById('run-analytics-btn').addEventListener('click', runAnalytics);
+    document.getElementById('run-forecast-btn').addEventListener('click', runForecast);
     document.getElementById('go-charts-btn').addEventListener('click', () => showStep('charts'));
     // Step 5
     document.getElementById('run-insights-btn').addEventListener('click', runInsights);
@@ -319,6 +320,40 @@ function renderKPIs(data) {
         document.getElementById('monthly-section').classList.remove('hidden');
     }
     document.getElementById('analytics-result').classList.remove('hidden');
+}
+
+// ─────────────────────────────────────────────────────────────
+// Forecast
+// ─────────────────────────────────────────────────────────────
+async function runForecast() {
+    if (!datasetId) return;
+    showLoading('🔮 Running AI forecasting model (Linear Regression)…');
+    try {
+        const res = await fetch(`${API}/forecast/${datasetId}?periods=3`);
+        if (!res.ok) throw new Error(await extractError(res));
+        const data = await res.json();
+        renderForecast(data);
+        showToast('✅ Forecast generated!');
+    } catch (err) { showToast(`❌ ${err.message}`, 'error'); }
+    finally { hideLoading(); }
+}
+
+function renderForecast(data) {
+    const section = document.getElementById('forecast-section');
+    const grid = document.getElementById('forecast-grid');
+
+    if (!data.forecast || data.forecast.length === 0) {
+        showToast('No forecast available', 'warning');
+        return;
+    }
+
+    grid.innerHTML = data.forecast.map(f => `
+    <div class="kpi-card" style="border: 1px solid var(--purple)">
+      <div class="kpi-label">${f.period_label}</div>
+      <div class="kpi-value kpi-growth-pos">KES ${(+f.forecasted_revenue).toLocaleString('en-KE', { maximumFractionDigits: 0 })}</div>
+    </div>`).join('');
+
+    section.classList.remove('hidden');
 }
 
 // ─────────────────────────────────────────────────────────────

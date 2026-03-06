@@ -1,0 +1,26 @@
+============================= test session starts =============================
+platform win32 -- Python 3.14.3, pytest-9.0.2, pluggy-1.6.0
+rootdir: C:\Users\YOGA X390\.gemini\antigravity\scratch\analytic-ai\backend
+plugins: anyio-4.12.1
+collected 1 item
+
+tests\test_forecast.py F                                                 [100%]
+
+================================== FAILURES ===================================
+______________ test_forecast_missing_dataset_requires_analytics _______________
+async def functions are not natively supported.
+You need to install a suitable plugin for your async framework, for example:
+  - anyio
+  - pytest-asyncio
+  - pytest-tornasync
+  - pytest-trio
+  - pytest-twisted
+============================== warnings summary ===============================
+tests\test_forecast.py:5
+  C:\Users\YOGA X390\.gemini\antigravity\scratch\analytic-ai\backend\tests\test_forecast.py:5: PytestUnknownMarkWarning: Unknown pytest.mark.asyncio - is this a typo?  You can register custom marks to avoid this warning - for details, see https://docs.pytest.org/en/stable/how-to/mark.html
+    @pytest.mark.asyncio
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ===========================
+FAILED tests/test_forecast.py::test_forecast_missing_dataset_requires_analytics
+======================== 1 failed, 1 warning in 12.85s ========================

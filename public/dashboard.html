@@ -164,7 +164,13 @@
                         <h3>Monthly Revenue Breakdown</h3>
                         <div class="monthly-bars" id="monthly-bars"></div>
                     </div>
+                    <div id="forecast-section" class="monthly-section hidden" style="margin-top:2rem">
+                        <h3>🔮 AI Revenue Forecast (3 Periods)</h3>
+                        <div class="kpi-grid" id="forecast-grid"></div>
+                    </div>
                     <div class="step-actions">
+                        <button class="btn-secondary" id="run-forecast-btn" style="margin-right:0.5rem">🔮 Predict
+                            Future</button>
                         <button class="btn-primary" id="go-charts-btn">🎨 Generate Charts →</button>
                     </div>
                 </div>
@@ -248,7 +254,7 @@
         </div>
     </div>
 
-    <script src="config.js"></script>
+    <script src="config.js?v=2"></script>
     <script src="dashboard.js"></script>
 
 </body>

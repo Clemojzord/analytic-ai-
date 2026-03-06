@@ -1,0 +1,89 @@
+============================= test session starts =============================
+platform win32 -- Python 3.14.3, pytest-8.4.2, pluggy-1.6.0
+rootdir: C:\Users\YOGA X390\.gemini\antigravity\scratch\analytic-ai\backend
+plugins: anyio-4.12.1, asyncio-0.23.6
+asyncio: mode=Mode.STRICT
+collected 3 items
+
+tests\test_auth.py FF                                                    [ 66%]
+tests\test_forecast.py F                                                 [100%]
+
+================================== FAILURES ===================================
+_____________________________ test_register_user ______________________________
+tests\test_auth.py:7: in test_register_user
+    async with AsyncClient(app=app, base_url="http://test") as ac:
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   TypeError: AsyncClient.__init__() got an unexpected keyword argument 'app'
+_______________________________ test_login_user _______________________________
+tests\test_auth.py:24: in test_login_user
+    async with AsyncClient(app=app, base_url="http://test") as ac:
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   TypeError: AsyncClient.__init__() got an unexpected keyword argument 'app'
+______________ test_forecast_missing_dataset_requires_analytics _______________
+tests\test_forecast.py:7: in test_forecast_missing_dataset_requires_analytics
+    async with AsyncClient(app=app, base_url="http://test") as ac:
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   TypeError: AsyncClient.__init__() got an unexpected keyword argument 'app'
+============================== warnings summary ===============================
+venv\Lib\site-packages\pytest_asyncio\plugin.py:166: 100 warnings
+  C:\Users\YOGA X390\.gemini\antigravity\scratch\analytic-ai\backend\venv\Lib\site-packages\pytest_asyncio\plugin.py:166: DeprecationWarning: 'asyncio.iscoroutinefunction' is deprecated and slated for removal in Python 3.16; use inspect.iscoroutinefunction() instead
+    return asyncio.iscoroutinefunction(obj) or inspect.isasyncgenfunction(obj)
+
+venv\Lib\site-packages\pytest_asyncio\plugin.py:429
+venv\Lib\site-packages\pytest_asyncio\plugin.py:429
+venv\Lib\site-packages\pytest_asyncio\plugin.py:429
+  C:\Users\YOGA X390\.gemini\antigravity\scratch\analytic-ai\backend\venv\Lib\site-packages\pytest_asyncio\plugin.py:429: DeprecationWarning: 'asyncio.iscoroutinefunction' is deprecated and slated for removal in Python 3.16; use inspect.iscoroutinefunction() instead
+    return asyncio.iscoroutinefunction(func)
+
+tests/test_auth.py::test_register_user
+  C:\Users\YOGA X390\.gemini\antigravity\scratch\analytic-ai\backend\venv\Lib\site-packages\pytest_asyncio\plugin.py:996: DeprecationWarning: 'asyncio.get_event_loop_policy' is deprecated and slated for removal in Python 3.16
+    return asyncio.get_event_loop_policy()
+
+tests/test_auth.py::test_register_user
+tests/test_auth.py::test_login_user
+tests/test_forecast.py::test_forecast_missing_dataset_requires_analytics
+  C:\Users\YOGA X390\.gemini\antigravity\scratch\analytic-ai\backend\venv\Lib\site-packages\pytest_asyncio\plugin.py:749: DeprecationWarning: 'asyncio.get_event_loop_policy' is deprecated and slated for removal in Python 3.16
+    _restore_event_loop_policy(asyncio.get_event_loop_policy()),
+
+tests/test_auth.py::test_register_user
+tests/test_auth.py::test_login_user
+tests/test_forecast.py::test_forecast_missing_dataset_requires_analytics
+  C:\Users\YOGA X390\.gemini\antigravity\scratch\analytic-ai\backend\venv\Lib\site-packages\pytest_asyncio\plugin.py:968: DeprecationWarning: 'asyncio.set_event_loop_policy' is deprecated and slated for removal in Python 3.16
+    asyncio.set_event_loop_policy(new_loop_policy)
+
+tests/test_auth.py::test_register_user
+tests/test_auth.py::test_login_user
+tests/test_forecast.py::test_forecast_missing_dataset_requires_analytics
+  C:\Users\YOGA X390\.gemini\antigravity\scratch\analytic-ai\backend\venv\Lib\site-packages\pytest_asyncio\plugin.py:969: DeprecationWarning: 'asyncio.get_event_loop_policy' is deprecated and slated for removal in Python 3.16
+    loop = asyncio.get_event_loop_policy().new_event_loop()
+
+tests/test_auth.py::test_register_user
+tests/test_auth.py::test_login_user
+tests/test_forecast.py::test_forecast_missing_dataset_requires_analytics
+  C:\Users\YOGA X390\.gemini\antigravity\scratch\analytic-ai\backend\venv\Lib\site-packages\pytest_asyncio\plugin.py:764: DeprecationWarning: 'asyncio.get_event_loop_policy' is deprecated and slated for removal in Python 3.16
+    policy = asyncio.get_event_loop_policy()
+
+tests/test_auth.py::test_register_user
+tests/test_auth.py::test_login_user
+tests/test_forecast.py::test_forecast_missing_dataset_requires_analytics
+  C:\Users\YOGA X390\.gemini\antigravity\scratch\analytic-ai\backend\venv\Lib\site-packages\pytest_asyncio\plugin.py:811: DeprecationWarning: 'asyncio.get_event_loop_policy' is deprecated and slated for removal in Python 3.16
+    policy = asyncio.get_event_loop_policy()
+
+tests/test_auth.py::test_register_user
+tests/test_auth.py::test_login_user
+tests/test_forecast.py::test_forecast_missing_dataset_requires_analytics
+  C:\Users\YOGA X390\.gemini\antigravity\scratch\analytic-ai\backend\venv\Lib\site-packages\pytest_asyncio\plugin.py:837: DeprecationWarning: 'asyncio.set_event_loop_policy' is deprecated and slated for removal in Python 3.16
+    asyncio.set_event_loop_policy(previous_policy)
+
+tests/test_auth.py::test_register_user
+tests/test_auth.py::test_login_user
+tests/test_forecast.py::test_forecast_missing_dataset_requires_analytics
+  C:\Users\YOGA X390\.gemini\antigravity\scratch\analytic-ai\backend\venv\Lib\site-packages\pytest_asyncio\plugin.py:849: DeprecationWarning: 'asyncio.get_event_loop_policy' is deprecated and slated for removal in Python 3.16
+    policy = asyncio.get_event_loop_policy()
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ===========================
+FAILED tests/test_auth.py::test_register_user - TypeError: AsyncClient.__init...
+FAILED tests/test_auth.py::test_login_user - TypeError: AsyncClient.__init__(...
+FAILED tests/test_forecast.py::test_forecast_missing_dataset_requires_analytics
+====================== 3 failed, 125 warnings in 14.83s =======================

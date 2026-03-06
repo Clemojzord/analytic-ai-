@@ -8,7 +8,7 @@ from fastapi.staticfiles import StaticFiles
 
 from core.config import settings
 from core.database import init_db
-from routers import analytics, clean, insights, reports, upload, visualize
+from routers import analytics, auth, clean, forecast, insights, reports, upload, visualize
 
 # Path to the frontend public/ directory (one level up from backend/)
 PUBLIC_DIR = Path(__file__).parent.parent / "public"
@@ -55,9 +55,11 @@ if PUBLIC_DIR.exists():
     app.mount("/app", StaticFiles(directory=str(PUBLIC_DIR), html=True), name="frontend")
 
 # ── Routers ───────────────────────────────────────────────────
+app.include_router(auth.router)
 app.include_router(upload.router)
 app.include_router(clean.router)
 app.include_router(analytics.router)
+app.include_router(forecast.router)
 app.include_router(visualize.router)
 app.include_router(insights.router)
 app.include_router(reports.router)

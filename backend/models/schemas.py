@@ -136,3 +136,25 @@ class ReportResponse(BaseModel):
     file_url: str
     file_size_kb: float
     generated_at: datetime
+
+
+# ── Auth ──────────────────────────────────────────────────────
+
+class UserCreate(BaseModel):
+    email: str
+    password: str
+    full_name: Optional[str] = None
+
+
+class UserResponse(BaseModel):
+    id: int
+    email: str
+    full_name: Optional[str] = None
+    is_active: bool
+
+    model_config = {"from_attributes": True}
+
+
+class Token(BaseModel):
+    access_token: str
+    token_type: str
