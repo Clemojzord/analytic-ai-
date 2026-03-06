@@ -1,0 +1,25 @@
+# Analytic AI — Project Root .gitignore
+# ──────────────────────────────────────
+
+# Python / backend
+backend/__pycache__/
+backend/*.py[cod]
+backend/.env
+backend/venv/
+backend/.venv/
+backend/analytic_ai.db
+backend/uploads/
+backend/outputs/
+backend/.pytest_cache/
+backend/pytest_out.txt
+backend/test_output.txt
+
+# Node / Firebase tools
+node_modules/
+.firebase/
+*.log
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini

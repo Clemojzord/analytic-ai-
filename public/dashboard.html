@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Analytic AI — Dashboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&family=Inter:wght@400;500;600&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="dashboard.css" />
+</head>
+
+<body>
+
+    <!-- ── Navigation ───────────────────────────────────────── -->
+    <nav class="dash-nav">
+        <a href="index.html" class="logo">📊 <span>Analytic AI</span></a>
+        <div class="nav-status">
+            <span id="api-status" class="status-dot offline" title="API connection status"></span>
+            <span id="api-label">Connecting…</span>
+        </div>
+    </nav>
+
+    <!-- ── Pipeline Steps sidebar ──────────────────────────── -->
+    <div class="layout">
+
+        <aside class="sidebar">
+            <p class="sidebar-title">Pipeline</p>
+            <ul class="steps-list">
+                <li class="step-item active" data-step="upload" id="nav-upload">
+                    <span class="step-icon">📁</span>
+                    <span class="step-label">Upload Data</span>
+                    <span class="step-tick hidden">✓</span>
+                </li>
+                <li class="step-item locked" data-step="clean" id="nav-clean">
+                    <span class="step-icon">🧹</span>
+                    <span class="step-label">Clean Data</span>
+                    <span class="step-tick hidden">✓</span>
+                </li>
+                <li class="step-item locked" data-step="analytics" id="nav-analytics">
+                    <span class="step-icon">📈</span>
+                    <span class="step-label">Analytics</span>
+                    <span class="step-tick hidden">✓</span>
+                </li>
+                <li class="step-item locked" data-step="charts" id="nav-charts">
+                    <span class="step-icon">🎨</span>
+                    <span class="step-label">Charts</span>
+                    <span class="step-tick hidden">✓</span>
+                </li>
+                <li class="step-item locked" data-step="insights" id="nav-insights">
+                    <span class="step-icon">💡</span>
+                    <span class="step-label">Insights</span>
+                    <span class="step-tick hidden">✓</span>
+                </li>
+                <li class="step-item locked" data-step="reports" id="nav-reports">
+                    <span class="step-icon">📄</span>
+                    <span class="step-label">Reports</span>
+                    <span class="step-tick hidden">✓</span>
+                </li>
+            </ul>
+
+            <!-- Dataset list -->
+            <div class="sidebar-section">
+                <p class="sidebar-title">My Datasets</p>
+                <ul id="dataset-list" class="dataset-list">
+                    <li class="ds-empty">No datasets yet</li>
+                </ul>
+            </div>
+        </aside>
+
+        <!-- ── Main panel ──────────────────────────────────────── -->
+        <main class="main-panel">
+
+            <!-- ═══ STEP 1: UPLOAD ═══ -->
+            <section id="step-upload" class="step-section active">
+                <div class="step-header">
+                    <h1>Upload Your Data <span class="badge">Step 1</span></h1>
+                    <p>Drag & drop a CSV or Excel file, or click to browse.</p>
+                </div>
+
+                <div class="upload-zone" id="drop-zone">
+                    <div class="upload-icon">📂</div>
+                    <p class="upload-title">Drop your file here</p>
+                    <p class="upload-sub">CSV or Excel (.xlsx) · Max 50 MB</p>
+                    <button class="btn-upload" id="browse-btn">Browse Files</button>
+                    <input type="file" id="file-input" accept=".csv,.xlsx,.xls" hidden />
+                </div>
+
+                <!-- Sample file quick-load -->
+                <div class="sample-bar">
+                    <span>No file? Try our sample:</span>
+                    <button class="btn-sample" id="sample-btn">📊 Load Sample Sales Data</button>
+                </div>
+
+                <!-- Upload progress -->
+                <div id="upload-progress" class="progress-card hidden">
+                    <div class="progress-info">
+                        <span id="upload-filename">file.csv</span>
+                        <span id="upload-status-text">Uploading…</span>
+                    </div>
+                    <div class="progress-bar-wrap">
+                        <div class="progress-bar" id="progress-bar"></div>
+                    </div>
+                </div>
+
+                <!-- Upload result -->
+                <div id="upload-result" class="result-card hidden">
+                    <div class="result-header">
+                        <span class="result-icon">✅</span>
+                        <div>
+                            <h3 id="result-name">dataset.csv</h3>
+                            <p id="result-meta">0 rows · 0 columns</p>
+                        </div>
+                    </div>
+                    <div class="preview-wrap">
+                        <p class="preview-label">Data Preview (first 5 rows)</p>
+                        <div class="table-scroll">
+                            <table id="preview-table" class="data-table"></table>
+                        </div>
+                    </div>
+                    <div class="step-actions">
+                        <button class="btn-primary" id="go-clean-btn">🧹 Clean This Data →</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ═══ STEP 2: CLEAN ═══ -->
+            <section id="step-clean" class="step-section hidden">
+                <div class="step-header">
+                    <h1>Auto-Clean Data <span class="badge">Step 2</span></h1>
+                    <p>Our Pandas engine will normalize, fix nulls, and flag outliers automatically.</p>
+                </div>
+                <div class="clean-preview-card">
+                    <div class="clean-stat" id="cs-rows"><span class="cs-num">—</span><span class="cs-lbl">Rows</span>
+                    </div>
+                    <div class="clean-stat" id="cs-cols"><span class="cs-num">—</span><span
+                            class="cs-lbl">Columns</span></div>
+                    <div class="clean-stat" id="cs-status"><span class="cs-num"
+                            style="font-size:1.2rem">Pending</span><span class="cs-lbl">Status</span></div>
+                </div>
+                <button class="btn-primary" id="run-clean-btn">🚀 Run Cleaning Pipeline</button>
+                <div id="clean-result" class="result-card hidden">
+                    <h3>✅ Cleaning Complete</h3>
+                    <div class="stats-grid" id="clean-stats-grid"></div>
+                    <div class="columns-report hidden" id="rename-report"></div>
+                    <div class="step-actions">
+                        <button class="btn-primary" id="go-analytics-btn">📈 Run Analytics →</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ═══ STEP 3: ANALYTICS ═══ -->
+            <section id="step-analytics" class="step-section hidden">
+                <div class="step-header">
+                    <h1>Business Analytics <span class="badge">Step 3</span></h1>
+                    <p>NumPy-powered KPIs computed automatically from your data.</p>
+                </div>
+                <button class="btn-primary" id="run-analytics-btn">⚡ Compute KPIs</button>
+                <div id="analytics-result" class="result-card hidden">
+                    <div class="kpi-grid" id="kpi-grid"></div>
+                    <div id="monthly-section" class="monthly-section hidden">
+                        <h3>Monthly Revenue Breakdown</h3>
+                        <div class="monthly-bars" id="monthly-bars"></div>
+                    </div>
+                    <div class="step-actions">
+                        <button class="btn-primary" id="go-charts-btn">🎨 Generate Charts →</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ═══ STEP 4: CHARTS ═══ -->
+            <section id="step-charts" class="step-section hidden">
+                <div class="step-header">
+                    <h1>Data Visualizations <span class="badge">Step 4</span></h1>
+                    <p>Seaborn-powered charts rendered from your dataset.</p>
+                </div>
+                <div class="chart-type-bar">
+                    <button class="chart-tab active" data-chart="revenue_trend">📈 Revenue</button>
+                    <button class="chart-tab" data-chart="product_pie">🥧 Products</button>
+                    <button class="chart-tab" data-chart="branch_bar">🏪 Branches</button>
+                    <button class="chart-tab" data-chart="sales_heatmap">🌡️ Heatmap</button>
+                    <button class="chart-tab" data-chart="segment_scatter">👥 Segments</button>
+                </div>
+                <div id="chart-display" class="chart-display">
+                    <div class="chart-placeholder">
+                        <p>Click a chart above to generate it</p>
+                    </div>
+                </div>
+                <div class="step-actions">
+                    <button class="btn-primary" id="go-insights-btn">💡 Get Insights →</button>
+                </div>
+            </section>
+
+            <!-- ═══ STEP 5: INSIGHTS ═══ -->
+            <section id="step-insights" class="step-section hidden">
+                <div class="step-header">
+                    <h1>AI Business Insights <span class="badge">Step 5</span></h1>
+                    <p>Rule-based engine generates written commentary on your business performance.</p>
+                </div>
+                <button class="btn-primary" id="run-insights-btn">💡 Generate Insights</button>
+                <div id="insights-result" class="result-card hidden">
+                    <div class="exec-summary" id="exec-summary"></div>
+                    <div class="insights-list" id="insights-list"></div>
+                    <div class="step-actions">
+                        <button class="btn-primary" id="go-reports-btn">📄 Create Report →</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ═══ STEP 6: REPORTS ═══ -->
+            <section id="step-reports" class="step-section hidden">
+                <div class="step-header">
+                    <h1>Download Reports <span class="badge">Step 6</span></h1>
+                    <p>Get your branded business intelligence report in PDF or Excel.</p>
+                </div>
+                <div class="reports-grid">
+                    <div class="report-card">
+                        <div class="report-icon">📄</div>
+                        <h3>PDF Report</h3>
+                        <p>Branded layout with KPI table, monthly breakdown, charts, and written insights.</p>
+                        <button class="btn-primary" id="dl-pdf-btn">⬇ Download PDF</button>
+                    </div>
+                    <div class="report-card">
+                        <div class="report-icon">📊</div>
+                        <h3>Excel Report</h3>
+                        <p>Multi-sheet workbook: KPI summary, monthly data, insights, and cleaned data sheet.</p>
+                        <button class="btn-primary btn-green" id="dl-excel-btn">⬇ Download Excel</button>
+                    </div>
+                </div>
+                <div class="step-actions" style="margin-top:2rem">
+                    <button class="btn-secondary" id="start-over-btn">↩ Start Over with New File</button>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <!-- ── Toast notification ──────────────────────────────── -->
+    <div id="toast" class="toast hidden"></div>
+
+    <!-- ── Loading overlay ──────────────────────────────────── -->
+    <div id="loader" class="loader-overlay hidden">
+        <div class="loader-box">
+            <div class="spinner"></div>
+            <p id="loader-msg">Processing…</p>
+        </div>
+    </div>
+
+    <script src="config.js"></script>
+    <script src="dashboard.js"></script>
+
+</body>
+
+</html>

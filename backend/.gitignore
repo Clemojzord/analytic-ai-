@@ -1,0 +1,14 @@
+__pycache__/
+*.py[cod]
+*.pyo
+.env
+venv/
+.venv/
+analytic_ai.db
+uploads/
+outputs/
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+dist/
+build/

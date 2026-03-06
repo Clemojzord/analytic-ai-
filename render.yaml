@@ -1,0 +1,26 @@
+# ── Render Blueprint ─────────────────────────────────────────
+# Deploy at: https://dashboard.render.com/select-repo
+# Docs: https://render.com/docs/blueprint-spec
+
+services:
+  - type: web
+    name: analytic-ai-backend
+    env: docker
+    dockerfilePath: ./backend/Dockerfile
+    dockerContext: ./backend
+    region: oregon          # Free tier region
+    plan: free
+    healthCheckPath: /health
+
+    envVars:
+      # CORS: allow your Firebase domain + localhost for dev
+      - key: CORS_ORIGINS
+        value: https://analytic-ai-icg.web.app,https://analytic-ai-icg.firebaseapp.com,http://localhost:8000
+
+      # SQLite path inside the container
+      - key: DATABASE_URL
+        value: sqlite+aiosqlite:///./analytic_ai.db
+
+      # Currency
+      - key: DEFAULT_CURRENCY
+        value: KES

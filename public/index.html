@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Analytic AI — Course Catalog | analytic.icg</title>
+  <meta name="description"
+    content="Master the complete Analytic AI platform — from data ingestion to predictive analytics, ML dashboards, and automated business insights. Built for African SMEs." />
+  <meta name="keywords"
+    content="analytic AI, data analytics, machine learning, Kenya, SME analytics, Python, Pandas, business intelligence" />
+  <meta property="og:title" content="Analytic AI — Course Catalog" />
+  <meta property="og:description"
+    content="9-module platform mastery: ingest, clean, analyze, visualize, and predict business data with AI." />
+  <meta property="og:type" content="website" />
+  <link rel="icon"
+    href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📊</text></svg>" />
+  <link rel="stylesheet" href="index.css" />
+</head>
+
+<body>
+
+  <!-- ── Navigation ─────────────────────────────────────── -->
+  <nav class="navbar" id="navbar">
+    <a href="#home" class="nav-logo">
+      <div class="nav-logo-icon">A</div>
+      <span class="nav-logo-text">Analytic AI</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#courses">Courses</a></li>
+      <li><a href="#stack">Tech Stack</a></li>
+      <li><a href="dashboard.html" class="btn-nav">🚀 Launch App →</a></li>
+    </ul>
+    <span class="nav-badge">analytic.icg</span>
+  </nav>
+
+  <!-- ── Hero ───────────────────────────────────────────── -->
+  <section class="hero" id="home">
+    <div class="hero-bg"></div>
+    <div class="hero-overlay"></div>
+    <div class="particles" id="particles"></div>
+    <div class="hero-content">
+      <div class="hero-eyebrow">
+        <span class="dot"></span>
+        Complete Platform Mastery · 9 Modules
+      </div>
+      <h1 class="hero-title">
+        <span class="line-1">Business Intelligence</span>
+        <span class="line-2">Powered by AI</span>
+      </h1>
+      <p class="hero-subtitle">
+        From raw CSV to automated insights — master the full Analytic AI stack.
+        Built for African SMEs ready to make data-driven decisions at scale.
+      </p>
+      <div class="hero-actions">
+        <a href="#courses" class="btn-primary">
+          Explore Catalog
+          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+            <path d="M5 12h14m-7-7 7 7-7 7" />
+          </svg>
+        </a>
+        <a href="#stack" class="btn-secondary">
+          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="10" />
+            <path d="M12 16v-4m0-4h.01" />
+          </svg>
+          View Tech Stack
+        </a>
+      </div>
+      <div class="hero-stats">
+        <div>
+          <span class="hero-stat-value" id="stat-modules">9</span>
+          <span class="hero-stat-label">Modules</span>
+        </div>
+        <div>
+          <span class="hero-stat-value">3</span>
+          <span class="hero-stat-label">Skill Levels</span>
+        </div>
+        <div>
+          <span class="hero-stat-value">12+</span>
+          <span class="hero-stat-label">Tools Covered</span>
+        </div>
+        <div>
+          <span class="hero-stat-value">KES</span>
+          <span class="hero-stat-label">Kenya Ready</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Course Catalog ──────────────────────────────────── -->
+  <main class="section" id="courses">
+    <div class="section-header">
+      <div class="section-tag">Course Catalog</div>
+      <h2 class="section-title">Complete Platform Modules</h2>
+      <p class="section-subtitle">
+        Every layer of the Analytic AI pipeline — from raw data upload to predictive machine learning.
+      </p>
+    </div>
+
+    <!-- Filter Bar -->
+    <div class="filter-bar" id="filter-bar" role="group" aria-label="Filter courses by category">
+      <button class="filter-btn active" data-filter="all" id="filter-all">All Modules</button>
+      <button class="filter-btn" data-filter="upload" id="filter-upload">📤 Upload</button>
+      <button class="filter-btn" data-filter="cleaning" id="filter-cleaning">🧹 Cleaning</button>
+      <button class="filter-btn" data-filter="storage" id="filter-storage">🗄️ Storage</button>
+      <button class="filter-btn" data-filter="analytics" id="filter-analytics">📐 Analytics</button>
+      <button class="filter-btn" data-filter="viz" id="filter-viz">📊 Visualization</button>
+      <button class="filter-btn" data-filter="insights" id="filter-insights">💡 Insights</button>
+      <button class="filter-btn" data-filter="reports" id="filter-reports">📄 Reports</button>
+      <button class="filter-btn" data-filter="ml" id="filter-ml">🤖 ML / AI</button>
+      <button class="filter-btn" data-filter="dashboard" id="filter-dashboard">🖥️ Dashboard</button>
+    </div>
+
+    <!-- Course Grid -->
+    <div class="courses-grid" id="courses-grid">
+      <div class="loading-state" id="loading-state">
+        <div class="spinner"></div>
+        <span>Loading courses from Firestore…</span>
+      </div>
+    </div>
+  </main>
+
+  <!-- ── Tech Stack ──────────────────────────────────────── -->
+  <section class="stack-section" id="stack">
+    <div style="max-width:1100px;margin:0 auto;text-align:center;margin-bottom:2.5rem;">
+      <div class="section-tag">Technology Stack</div>
+      <h2 class="section-title">Built With Best-in-Class Tools</h2>
+    </div>
+    <div class="stack-grid">
+      <div class="stack-card">
+        <div class="icon">🐍</div>
+        <div class="name">Python</div>
+        <div class="role">Core Language</div>
+      </div>
+      <div class="stack-card">
+        <div class="icon">🐼</div>
+        <div class="name">Pandas</div>
+        <div class="role">Data Cleaning</div>
+      </div>
+      <div class="stack-card">
+        <div class="icon">🔢</div>
+        <div class="name">NumPy</div>
+        <div class="role">Analytics Engine</div>
+      </div>
+      <div class="stack-card">
+        <div class="icon">⚡</div>
+        <div class="name">FastAPI</div>
+        <div class="role">Backend API</div>
+      </div>
+      <div class="stack-card">
+        <div class="icon">🐘</div>
+        <div class="name">PostgreSQL</div>
+        <div class="role">SQL Storage</div>
+      </div>
+      <div class="stack-card">
+        <div class="icon">📊</div>
+        <div class="name">Seaborn</div>
+        <div class="role">Visualization</div>
+      </div>
+      <div class="stack-card">
+        <div class="icon">🔥</div>
+        <div class="name">Firebase</div>
+        <div class="role">Hosting and DB</div>
+      </div>
+      <div class="stack-card">
+        <div class="icon">🤖</div>
+        <div class="name">Scikit-learn</div>
+        <div class="role">Machine Learning</div>
+      </div>
+      <div class="stack-card">
+        <div class="icon">☁️</div>
+        <div class="name">Cloud Storage</div>
+        <div class="role">File Uploads</div>
+      </div>
+      <div class="stack-card">
+        <div class="icon">📈</div>
+        <div class="name">Plotly</div>
+        <div class="role">Interactive Charts</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Footer ─────────────────────────────────────────── -->
+  <footer class="footer">
+    <div class="footer-logo">Analytic AI</div>
+    <p class="footer-tagline">Intelligence for the African Enterprise · analytic.icg</p>
+    <div class="footer-bottom">
+      <span>Built with 🔥 Firebase + Python · </span>Deployed to Firebase Hosting ·
+      © 2026 <span>Analytic AI</span> · Nairobi, Kenya
+    </div>
+  </footer>
+
+  <!-- ── Firebase SDK v9 Compat ─────────────────────────── -->
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+  <script src="app.js"></script>
+</body>
+
+</html>
