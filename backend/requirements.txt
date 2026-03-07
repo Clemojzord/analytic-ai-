@@ -37,7 +37,7 @@ httpx==0.27.0
 
 # ── Authentication & ML ─────────────────────────────────────
 passlib[bcrypt]==1.7.4
-bcrypt==4.1.2
+bcrypt==3.2.2
 PyJWT==2.8.0
 scikit-learn==1.4.1.post1
 statsmodels==0.14.1

@@ -1,0 +1,269 @@
+============================= test session starts =============================
+platform win32 -- Python 3.14.3, pytest-8.4.2, pluggy-1.6.0 -- C:\Users\YOGA X390\.gemini\antigravity\scratch\analytic-ai\backend\venv\Scripts\python.exe
+cachedir: .pytest_cache
+rootdir: C:\Users\YOGA X390\.gemini\antigravity\scratch\analytic-ai\backend
+plugins: anyio-4.12.1, asyncio-0.23.6
+asyncio: mode=Mode.STRICT
+collecting ... collected 20 items
+
+tests/test_auth.py::test_register_user FAILED                            [  5%]
+tests/test_auth.py::test_login_user FAILED                               [ 10%]
+tests/test_engines.py::TestCleaner::test_normalize_columns PASSED        [ 15%]
+tests/test_engines.py::TestCleaner::test_removes_duplicates PASSED       [ 20%]
+tests/test_engines.py::TestCleaner::test_fills_nulls PASSED              [ 25%]
+tests/test_engines.py::TestCleaner::test_outlier_flagging PASSED         [ 30%]
+tests/test_engines.py::TestCleaner::test_rows_preserved PASSED           [ 35%]
+tests/test_engines.py::TestAnalytics::test_total_revenue_positive PASSED [ 40%]
+tests/test_engines.py::TestAnalytics::test_profit_margin_in_range PASSED [ 45%]
+tests/test_engines.py::TestAnalytics::test_monthly_revenue_sorted PASSED [ 50%]
+tests/test_engines.py::TestAnalytics::test_top_product_is_string PASSED  [ 55%]
+tests/test_engines.py::TestAnalytics::test_clv_positive PASSED           [ 60%]
+tests/test_engines.py::TestInsights::test_insights_list_not_empty PASSED [ 65%]
+tests/test_engines.py::TestInsights::test_executive_summary_not_empty PASSED [ 70%]
+tests/test_engines.py::TestInsights::test_severity_values_valid PASSED   [ 75%]
+tests/test_engines.py::TestInsights::test_zero_revenue_triggers_critical PASSED [ 80%]
+tests/test_engines.py::TestVisualizer::test_revenue_trend_returns_base64 PASSED [ 85%]
+tests/test_engines.py::TestVisualizer::test_product_pie_returns_base64 PASSED [ 90%]
+tests/test_engines.py::TestVisualizer::test_invalid_chart_type_raises PASSED [ 95%]
+tests/test_forecast.py::test_forecast_missing_dataset_requires_analytics PASSED [100%]
+
+================================== FAILURES ===================================
+_____________________________ test_register_user ______________________________
+
+    @pytest.mark.asyncio
+    async def test_register_user():
+        async with AsyncClient(transport=ASGITransport(app=app), base_url="http://test") as ac:
+>           response = await ac.post("/auth/register", json={
+                "email": "test_auth@example.com",
+                "password": "securepassword",
+                "full_name": "Auth User"
+            })
+
+tests\test_auth.py:8: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+venv\Lib\site-packages\httpx\_client.py:1859: in post
+    return await self.request(
+venv\Lib\site-packages\httpx\_client.py:1540: in request
+    return await self.send(request, auth=auth, follow_redirects=follow_redirects)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+venv\Lib\site-packages\httpx\_client.py:1629: in send
+    response = await self._send_handling_auth(
+venv\Lib\site-packages\httpx\_client.py:1657: in _send_handling_auth
+    response = await self._send_handling_redirects(
+venv\Lib\site-packages\httpx\_client.py:1694: in _send_handling_redirects
+    response = await self._send_single_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+venv\Lib\site-packages\httpx\_client.py:1730: in _send_single_request
+    response = await transport.handle_async_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+venv\Lib\site-packages\httpx\_transports\asgi.py:170: in handle_async_request
+    await self.app(scope, receive, send)
+venv\Lib\site-packages\fastapi\applications.py:1160: in __call__
+    await super().__call__(scope, receive, send)
+venv\Lib\site-packages\starlette\applications.py:107: in __call__
+    await self.middleware_stack(scope, receive, send)
+venv\Lib\site-packages\starlette\middleware\errors.py:186: in __call__
+    raise exc
+venv\Lib\site-packages\starlette\middleware\errors.py:164: in __call__
+    await self.app(scope, receive, _send)
+venv\Lib\site-packages\starlette\middleware\cors.py:87: in __call__
+    await self.app(scope, receive, send)
+venv\Lib\site-packages\starlette\middleware\exceptions.py:63: in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+venv\Lib\site-packages\starlette\_exception_handler.py:53: in wrapped_app
+    raise exc
+venv\Lib\site-packages\starlette\_exception_handler.py:42: in wrapped_app
+    await app(scope, receive, sender)
+venv\Lib\site-packages\fastapi\middleware\asyncexitstack.py:18: in __call__
+    await self.app(scope, receive, send)
+venv\Lib\site-packages\starlette\routing.py:716: in __call__
+    await self.middleware_stack(scope, receive, send)
+venv\Lib\site-packages\starlette\routing.py:736: in app
+    await route.handle(scope, receive, send)
+venv\Lib\site-packages\starlette\routing.py:290: in handle
+    await self.app(scope, receive, send)
+venv\Lib\site-packages\fastapi\routing.py:130: in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+venv\Lib\site-packages\starlette\_exception_handler.py:53: in wrapped_app
+    raise exc
+venv\Lib\site-packages\starlette\_exception_handler.py:42: in wrapped_app
+    await app(scope, receive, sender)
+venv\Lib\site-packages\fastapi\routing.py:116: in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+venv\Lib\site-packages\fastapi\routing.py:670: in app
+    raw_response = await run_endpoint_function(
+venv\Lib\site-packages\fastapi\routing.py:324: in run_endpoint_function
+    return await dependant.call(**values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+routers\auth.py:26: in register
+    hashed_password = get_password_hash(user_in.password)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+core\security.py:20: in get_password_hash
+    return pwd_context.hash(password)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+venv\Lib\site-packages\passlib\context.py:2258: in hash
+    return record.hash(secret, **kwds)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+venv\Lib\site-packages\passlib\utils\handlers.py:779: in hash
+    self.checksum = self._calc_checksum(secret)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+venv\Lib\site-packages\passlib\handlers\bcrypt.py:591: in _calc_checksum
+    self._stub_requires_backend()
+venv\Lib\site-packages\passlib\utils\handlers.py:2254: in _stub_requires_backend
+    cls.set_backend()
+venv\Lib\site-packages\passlib\utils\handlers.py:2156: in set_backend
+    return owner.set_backend(name, dryrun=dryrun)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+venv\Lib\site-packages\passlib\utils\handlers.py:2163: in set_backend
+    return cls.set_backend(name, dryrun=dryrun)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+venv\Lib\site-packages\passlib\utils\handlers.py:2188: in set_backend
+    cls._set_backend(name, dryrun)
+venv\Lib\site-packages\passlib\utils\handlers.py:2311: in _set_backend
+    super(SubclassBackendMixin, cls)._set_backend(name, dryrun)
+venv\Lib\site-packages\passlib\utils\handlers.py:2224: in _set_backend
+    ok = loader(**kwds)
+         ^^^^^^^^^^^^^^
+venv\Lib\site-packages\passlib\handlers\bcrypt.py:626: in _load_backend_mixin
+    return mixin_cls._finalize_backend_mixin(name, dryrun)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+venv\Lib\site-packages\passlib\handlers\bcrypt.py:421: in _finalize_backend_mixin
+    if detect_wrap_bug(IDENT_2A):
+       ^^^^^^^^^^^^^^^^^^^^^^^^^
+venv\Lib\site-packages\passlib\handlers\bcrypt.py:380: in detect_wrap_bug
+    if verify(secret, bug_hash):
+       ^^^^^^^^^^^^^^^^^^^^^^^^
+venv\Lib\site-packages\passlib\utils\handlers.py:792: in verify
+    return consteq(self._calc_checksum(secret), chk)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <passlib.handlers.bcrypt._BcryptBackend object at 0x000001EB17220D60>
+secret = b'01234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345...7890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234'
+
+    def _calc_checksum(self, secret):
+        # bcrypt behavior:
+        #   secret must be bytes
+        #   config must be ascii bytes
+        #   returns ascii bytes
+        secret, ident = self._prepare_digest_args(secret)
+        config = self._get_config(ident)
+        if isinstance(config, unicode):
+            config = config.encode("ascii")
+>       hash = _bcrypt.hashpw(secret, config)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       ValueError: password cannot be longer than 72 bytes, truncate manually if necessary (e.g. my_password[:72])
+
+venv\Lib\site-packages\passlib\handlers\bcrypt.py:655: ValueError
+---------------------------- Captured stdout call -----------------------------
+2026-03-07 12:25:00,682 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2026-03-07 12:25:00,718 INFO sqlalchemy.engine.Engine SELECT users.id, users.email, users.hashed_password, users.full_name, users.is_active, users.created_at 
+FROM users 
+WHERE users.email = ?
+2026-03-07 12:25:00,718 INFO sqlalchemy.engine.Engine [generated in 0.00092s] ('test_auth@example.com',)
+2026-03-07 12:25:00,753 INFO sqlalchemy.engine.Engine ROLLBACK
+------------------------------ Captured log call ------------------------------
+INFO     sqlalchemy.engine.Engine:base.py:2710 BEGIN (implicit)
+INFO     sqlalchemy.engine.Engine:base.py:1846 SELECT users.id, users.email, users.hashed_password, users.full_name, users.is_active, users.created_at 
+FROM users 
+WHERE users.email = ?
+INFO     sqlalchemy.engine.Engine:base.py:1846 [generated in 0.00092s] ('test_auth@example.com',)
+WARNING  passlib.handlers.bcrypt:bcrypt.py:622 (trapped) error reading bcrypt version
+Traceback (most recent call last):
+  File "C:\Users\YOGA X390\.gemini\antigravity\scratch\analytic-ai\backend\venv\Lib\site-packages\passlib\handlers\bcrypt.py", line 620, in _load_backend_mixin
+    version = _bcrypt.__about__.__version__
+              ^^^^^^^^^^^^^^^^^
+AttributeError: module 'bcrypt' has no attribute '__about__'
+INFO     sqlalchemy.engine.Engine:base.py:2713 ROLLBACK
+_______________________________ test_login_user _______________________________
+
+    @pytest.mark.asyncio
+    async def test_login_user():
+        async with AsyncClient(transport=ASGITransport(app=app), base_url="http://test") as ac:
+            # We assume the user was created in the previous test (or already exists).
+            response = await ac.post("/auth/login", data={
+                "username": "test_auth@example.com",
+                "password": "securepassword"
+            })
+    
+        # Ensure it returns an access token
+>       assert response.status_code == 200
+E       assert 401 == 200
+E        +  where 401 = <Response [401 Unauthorized]>.status_code
+
+tests\test_auth.py:32: AssertionError
+---------------------------- Captured stdout call -----------------------------
+2026-03-07 12:25:03,757 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2026-03-07 12:25:03,759 INFO sqlalchemy.engine.Engine SELECT users.id, users.email, users.hashed_password, users.full_name, users.is_active, users.created_at 
+FROM users 
+WHERE users.email = ?
+2026-03-07 12:25:03,760 INFO sqlalchemy.engine.Engine [cached since 3.042s ago] ('test_auth@example.com',)
+2026-03-07 12:25:03,764 INFO sqlalchemy.engine.Engine ROLLBACK
+------------------------------ Captured log call ------------------------------
+INFO     sqlalchemy.engine.Engine:base.py:2710 BEGIN (implicit)
+INFO     sqlalchemy.engine.Engine:base.py:1846 SELECT users.id, users.email, users.hashed_password, users.full_name, users.is_active, users.created_at 
+FROM users 
+WHERE users.email = ?
+INFO     sqlalchemy.engine.Engine:base.py:1846 [cached since 3.042s ago] ('test_auth@example.com',)
+INFO     sqlalchemy.engine.Engine:base.py:2713 ROLLBACK
+============================== warnings summary ===============================
+venv\Lib\site-packages\pytest_asyncio\plugin.py:166: 722 warnings
+  C:\Users\YOGA X390\.gemini\antigravity\scratch\analytic-ai\backend\venv\Lib\site-packages\pytest_asyncio\plugin.py:166: DeprecationWarning: 'asyncio.iscoroutinefunction' is deprecated and slated for removal in Python 3.16; use inspect.iscoroutinefunction() instead
+    return asyncio.iscoroutinefunction(obj) or inspect.isasyncgenfunction(obj)
+
+venv\Lib\site-packages\pytest_asyncio\plugin.py:429: 20 warnings
+  C:\Users\YOGA X390\.gemini\antigravity\scratch\analytic-ai\backend\venv\Lib\site-packages\pytest_asyncio\plugin.py:429: DeprecationWarning: 'asyncio.iscoroutinefunction' is deprecated and slated for removal in Python 3.16; use inspect.iscoroutinefunction() instead
+    return asyncio.iscoroutinefunction(func)
+
+tests/test_auth.py::test_register_user
+  C:\Users\YOGA X390\.gemini\antigravity\scratch\analytic-ai\backend\venv\Lib\site-packages\pytest_asyncio\plugin.py:996: DeprecationWarning: 'asyncio.get_event_loop_policy' is deprecated and slated for removal in Python 3.16
+    return asyncio.get_event_loop_policy()
+
+tests/test_auth.py::test_register_user
+tests/test_auth.py::test_login_user
+tests/test_forecast.py::test_forecast_missing_dataset_requires_analytics
+  C:\Users\YOGA X390\.gemini\antigravity\scratch\analytic-ai\backend\venv\Lib\site-packages\pytest_asyncio\plugin.py:749: DeprecationWarning: 'asyncio.get_event_loop_policy' is deprecated and slated for removal in Python 3.16
+    _restore_event_loop_policy(asyncio.get_event_loop_policy()),
+
+tests/test_auth.py::test_register_user
+tests/test_auth.py::test_login_user
+tests/test_forecast.py::test_forecast_missing_dataset_requires_analytics
+  C:\Users\YOGA X390\.gemini\antigravity\scratch\analytic-ai\backend\venv\Lib\site-packages\pytest_asyncio\plugin.py:968: DeprecationWarning: 'asyncio.set_event_loop_policy' is deprecated and slated for removal in Python 3.16
+    asyncio.set_event_loop_policy(new_loop_policy)
+
+tests/test_auth.py::test_register_user
+tests/test_auth.py::test_login_user
+tests/test_forecast.py::test_forecast_missing_dataset_requires_analytics
+  C:\Users\YOGA X390\.gemini\antigravity\scratch\analytic-ai\backend\venv\Lib\site-packages\pytest_asyncio\plugin.py:969: DeprecationWarning: 'asyncio.get_event_loop_policy' is deprecated and slated for removal in Python 3.16
+    loop = asyncio.get_event_loop_policy().new_event_loop()
+
+tests/test_auth.py::test_register_user
+tests/test_auth.py::test_login_user
+tests/test_forecast.py::test_forecast_missing_dataset_requires_analytics
+  C:\Users\YOGA X390\.gemini\antigravity\scratch\analytic-ai\backend\venv\Lib\site-packages\pytest_asyncio\plugin.py:764: DeprecationWarning: 'asyncio.get_event_loop_policy' is deprecated and slated for removal in Python 3.16
+    policy = asyncio.get_event_loop_policy()
+
+tests/test_auth.py::test_register_user
+tests/test_auth.py::test_login_user
+tests/test_forecast.py::test_forecast_missing_dataset_requires_analytics
+  C:\Users\YOGA X390\.gemini\antigravity\scratch\analytic-ai\backend\venv\Lib\site-packages\pytest_asyncio\plugin.py:811: DeprecationWarning: 'asyncio.get_event_loop_policy' is deprecated and slated for removal in Python 3.16
+    policy = asyncio.get_event_loop_policy()
+
+tests/test_auth.py::test_register_user
+tests/test_auth.py::test_login_user
+tests/test_forecast.py::test_forecast_missing_dataset_requires_analytics
+  C:\Users\YOGA X390\.gemini\antigravity\scratch\analytic-ai\backend\venv\Lib\site-packages\pytest_asyncio\plugin.py:837: DeprecationWarning: 'asyncio.set_event_loop_policy' is deprecated and slated for removal in Python 3.16
+    asyncio.set_event_loop_policy(previous_policy)
+
+tests/test_auth.py::test_register_user
+tests/test_auth.py::test_login_user
+tests/test_forecast.py::test_forecast_missing_dataset_requires_analytics
+  C:\Users\YOGA X390\.gemini\antigravity\scratch\analytic-ai\backend\venv\Lib\site-packages\pytest_asyncio\plugin.py:849: DeprecationWarning: 'asyncio.get_event_loop_policy' is deprecated and slated for removal in Python 3.16
+    policy = asyncio.get_event_loop_policy()
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ===========================
+FAILED tests/test_auth.py::test_register_user - ValueError: password cannot b...
+FAILED tests/test_auth.py::test_login_user - assert 401 == 200
+================= 2 failed, 18 passed, 764 warnings in 19.43s =================

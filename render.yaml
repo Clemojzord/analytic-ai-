@@ -13,6 +13,10 @@ services:
     healthCheckPath: /health
 
     envVars:
+      # Use modern Python to prevent pandas build errors
+      - key: PYTHON_VERSION
+        value: 3.11.8
+
       # CORS: allow your Firebase domain + localhost for dev
       - key: CORS_ORIGINS
         value: https://analytic-ai-icg.web.app,https://analytic-ai-icg.firebaseapp.com,http://localhost:8000
