@@ -8,5 +8,5 @@
  */
 const CONFIG = {
     // ▼ Replace with your Render URL after deploying the backend ▼
-    API_URL: 'http://127.0.0.1:8000'
+    API_URL: 'https://analytic-ai-3.onrender.com'
 };
