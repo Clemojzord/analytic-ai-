@@ -86,6 +86,8 @@ async def clean_dataset(
     ds.status = "cleaned"
     ds.row_count = len(cleaned_df)
 
+    await db.commit()
+
     return CleaningReportResponse(
         dataset_id=dataset_id,
         rows_before=report["rows_before"],
