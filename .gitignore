@@ -13,6 +13,8 @@ backend/outputs/
 backend/.pytest_cache/
 backend/pytest_out.txt
 backend/test_output.txt
+backend/firebase-admin.json
+
 
 # Node / Firebase tools
 node_modules/
