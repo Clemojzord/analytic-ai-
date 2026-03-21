@@ -30,13 +30,26 @@ async def lifespan(app: FastAPI):
 
     # Startup: initialize Firebase Admin
     if not firebase_admin._apps:
-        if SERVICE_ACCOUNT_PATH.exists():
-            print(f"DIAGNOSTIC: Initializing Firebase with service account at {SERVICE_ACCOUNT_PATH}")
-            cred = credentials.Certificate(str(SERVICE_ACCOUNT_PATH))
-            firebase_admin.initialize_app(cred)
-        else:
-            print("DIAGNOSTIC: Initializing Firebase with default credentials (ADC/Env)")
-            firebase_admin.initialize_app()
+        try:
+            if SERVICE_ACCOUNT_PATH.exists():
+                print(f"DIAGNOSTIC: Initializing Firebase with service account at {SERVICE_ACCOUNT_PATH}")
+                cred = credentials.Certificate(str(SERVICE_ACCOUNT_PATH))
+                firebase_admin.initialize_app(cred)
+            else:
+                # Try environment variable FIREBASE_CREDENTIALS or Google ADC
+                import json, os
+                firebase_creds_json = os.environ.get("FIREBASE_CREDENTIALS", "")
+                if firebase_creds_json:
+                    print("DIAGNOSTIC: Initializing Firebase from FIREBASE_CREDENTIALS env var")
+                    cred_dict = json.loads(firebase_creds_json)
+                    cred = credentials.Certificate(cred_dict)
+                    firebase_admin.initialize_app(cred)
+                else:
+                    print("DIAGNOSTIC: Initializing Firebase with default credentials (ADC)")
+                    firebase_admin.initialize_app()
+        except Exception as exc:
+            print(f"WARNING: Firebase initialization failed: {exc}")
+            print("WARNING: Auth endpoints will return errors until Firebase is configured.")
     
     # create DB tables
     await init_db()
