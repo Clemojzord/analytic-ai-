@@ -31,16 +31,18 @@ async def get_current_user(
         )
 
     token = creds.credentials
+
+    # Check if Firebase is initialized
+    if not firebase_admin._apps:
+        raise HTTPException(
+            status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
+            detail="Authentication service not configured. Set FIREBASE_CREDENTIALS env var on Render.",
+        )
+
     try:
         decoded = firebase_auth.verify_id_token(token)
-    except firebase_admin.exceptions.InvalidArgumentError:
-        raise HTTPException(status_code=401, detail="Invalid token format.")
-    except firebase_auth.InvalidIdTokenError:
-        raise HTTPException(status_code=401, detail="Invalid or expired token.")
-    except firebase_auth.ExpiredIdTokenError:
-        raise HTTPException(status_code=401, detail="Token has expired.")
     except Exception as exc:
-        print(f"DIAGNOSTIC: Firebase token verification failed: {exc}")
+        print(f"DIAGNOSTIC: Firebase token verification failed: {type(exc).__name__}: {exc}")
         raise HTTPException(status_code=401, detail=f"Authentication failed: {exc}")
 
     uid = decoded.get("uid")
