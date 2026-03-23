@@ -19,6 +19,7 @@ from routers.auth import get_current_user
 router = APIRouter(prefix="/upload", tags=["Upload"])
 
 
+@router.post("")
 @router.post("/")
 async def upload_file(
     file: UploadFile = File(...),
