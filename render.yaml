@@ -1,0 +1,23 @@
+# Render Blueprint — Analytic AI Backend
+# https://render.com/docs/blueprint-spec
+services:
+  - type: web
+    name: analytic-ai
+    runtime: python
+    buildCommand: pip install -r backend/requirements.txt
+    startCommand: cd backend && uvicorn main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      # Database (SQLite for now)
+      - key: DATABASE_URL
+        value: sqlite+aiosqlite:///./analytic_ai.db
+      # App
+      - key: APP_NAME
+        value: Analytic AI
+      - key: APP_VERSION
+        value: 1.0.0
+      # Currency
+      - key: DEFAULT_CURRENCY
+        value: KES
+      # Firebase - set this in the Render dashboard
+      - key: FIREBASE_CREDENTIALS
+        sync: false
